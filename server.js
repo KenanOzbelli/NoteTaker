@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
-const data = require("./db/db.json")
-const fs = require("fs")
+const data = require("./db/db.json");
+const fs = require("fs");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -23,7 +23,7 @@ app.post("/api/notes", function(req, res){
     const newNotes = req.body;
     let id 
     if(!data.length) id = 0
-    else id = data[data.length-1].id + 1 
+    else id = data[data.length -1].id + 1 
     newNotes.id = id 
     data.push(newNotes)
     fs.writeFile("./db/db.json", JSON.stringify(data),err=>{
@@ -32,7 +32,6 @@ app.post("/api/notes", function(req, res){
             throw err  
         } 
         res.json(data);
-
     })
 })
 
@@ -47,12 +46,8 @@ app.delete("/api/notes/:id", (req, res)=>{
             throw err  
         } 
         res.json(data);
-
     })
 })
-
-
-
 app.listen(PORT, () =>{
     console.log("Server listening at PORT" + PORT);
 })
